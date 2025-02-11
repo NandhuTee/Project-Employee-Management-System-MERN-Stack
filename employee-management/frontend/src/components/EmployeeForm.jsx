@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useContext } from 'react';
-import { EmployeeContext } from '../context/EmployeeContext';
+import '../styles/styles.css';
 
 const EmployeeForm = ({ employeeToEdit, setEmployeeToEdit }) => {
-  const { addEmployee, updateEmployee } = useContext(EmployeeContext); // Get functions from context
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,26 +30,12 @@ const EmployeeForm = ({ employeeToEdit, setEmployeeToEdit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // If editing, update the employee
-    if (employeeToEdit) {
-      updateEmployee(employeeToEdit._id, formData);
-    } else {
-      // If adding a new employee
-      addEmployee(formData);
-    }
-
+    // Handle form submission logic
     setEmployeeToEdit(null); // Clear the form after submission
-    setFormData({
-      name: '',
-      email: '',
-      age: '',
-      salary: ''
-    }); // Reset the form data
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="employee-form">
       <input
         type="text"
         name="name"
@@ -80,7 +64,7 @@ const EmployeeForm = ({ employeeToEdit, setEmployeeToEdit }) => {
         onChange={handleChange}
         placeholder="Salary"
       />
-      <button type="submit">{employeeToEdit ? 'Update' : 'Submit'}</button>
+      <button type="submit">Submit</button>
     </form>
   );
 };

@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { EmployeeContext } from '../context/EmployeeContext';
 import PropTypes from 'prop-types';
+import '../styles/styles.css';
 const EmployeeList = ({ setEmployeeToEdit }) => {
   const { employees, deleteEmployee, loading } = useContext(EmployeeContext);
 
@@ -9,7 +10,7 @@ const EmployeeList = ({ setEmployeeToEdit }) => {
   return (
     <div>
       <h2>Employee List</h2>
-      <ul>
+      <ul className="employee-list">
         {employees.map((employee) => (
           <li key={employee._id}>
             <strong>{employee.name}</strong> - {employee.email} - {employee.age} - ${employee.salary}
@@ -23,7 +24,7 @@ const EmployeeList = ({ setEmployeeToEdit }) => {
 };
 
 EmployeeList.propTypes = {
-    setEmployeeToEdit: PropTypes.func.isRequired,
-  };
+  setEmployeeToEdit: PropTypes.func.isRequired,
+};
 
 export default EmployeeList;
