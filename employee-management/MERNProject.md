@@ -1,130 +1,23 @@
-**Employee Management System**
+To test the API in **Postman**, make sure your backend is running and that you have the correct API endpoints. Here are the endpoints based on your frontend implementation:
 
-This project is a full-stack **Employee Management System** built with **React** for the frontend and **Node.js/Express** for the backend. It allows you to add, update, display, and delete employee records. The backend is connected to a **MongoDB** database to store employee data.
+**1\. Get All Employees (Test Read API)**
 
-**Table of Contents**
-
-- [Project Overview](#project-overview)
-- [Frontend Setup](#frontend-setup)
-- [Backend Setup](#backend-setup)
-- [Database Setup](#database-setup)
-- [API Endpoints](#api-endpoints)
-- [Technologies Used](#technologies-used)
-- [Contributing](#contributing)
-
-**Project Overview**
-
-This is a simple CRUD application where users can:
-
-- **View a list of employees**
-- **Add new employees**
-- **Edit existing employee details**
-- **Delete employees**
-
-It also features a responsive frontend built with **React**, while the backend is powered by **Node.js**, **Express**, and **MongoDB**.
-
-**Frontend Setup**
-
-**Prerequisites**
-
-- Node.js (v14 or higher)
-- npm (Node Package Manager)
-
-**Installation**
-
-1. Clone this repository to your local machine:
-
-```bash
-
-git clone <https://github.com/your-username/employee-management-system.git>
-```
-
-1. Navigate to the frontend directory:
-
-```bash
-
-cd employee-management-system/frontend
-```
-1. Install the necessary dependencies:
-
-```bash
-
-npm install
-```
-1. Run the React development server:
-
-```bash
-
-npm start
-```
-The frontend will now be available at <http://localhost:3000>.
-
-**Backend Setup**
-
-**Prerequisites**
-
-- Node.js (v14 or higher)
-- npm (Node Package Manager)
-- MongoDB (Local or Atlas)
-
-**Installation**
-
-1. Navigate to the backend directory:
-
-```bash
-
-cd employee-management-system/backend
-```
-
-1. Install the necessary dependencies:
-
-```bash
-
-npm install
-```
-1. Create a .env file to store your environment variables (MongoDB URI and JWT secret, if applicable):
-
-```ini
-
-MONGODB_URI=mongodb://localhost:27017/employeeDB
-
-JWT_SECRET=your_secret_key
-
-```
-
-1. Run the backend server:
-
-```bash
-
-npm start
-```
-The backend API will now be available at <http://localhost:5000>.
-
-**Database Setup**
-
-1. Make sure **MongoDB** is installed and running.
-2. Use MongoDB Atlas or a local MongoDB instance for storing employee data.
-3. Ensure that the MONGODB_URI environment variable is set correctly in your .env file for connecting to your MongoDB instance.
-
-**API Endpoints**
-
-**1\. Get All Employees**
-
-- **URL**: /api/employees/display
 - **Method**: GET
-- **Description**: Fetches the list of all employees.
-- **Response**:
+- **URL**:
+
+```bash
+
+<http://localhost:5000/api/employees/display>
+```
+- **Expected Response (Example)**:
 
 ```json
 
+\[
 
 {
 
-"employees": \[
-
-{
-
-"\_id": "1",
+"id": 1,
 
 "name": "John Doe",
 
@@ -134,26 +27,48 @@ The backend API will now be available at <http://localhost:5000>.
 
 "salary": 50000
 
+},
+
+{
+
+"id": 2,
+
+"name": "Jane Smith",
+
+"email": "<janesmith@example.com>",
+
+"age": 25,
+
+"salary": 60000
+
 }
 
 \]
-
-}
 ```
-**2\. Add a New Employee**
+**2\. Add a New Employee (Test Create API)**
 
-- **URL**: /api/employees/add
 - **Method**: POST
-- **Description**: Adds a new employee.
-- **Request Body**:
+- **URL**:
+
+```bash
+
+<http://localhost:5000/api/employees/add>
+```
+- **Headers**:
+
+pgsql
+
+Content-Type: application/json
+
+- **Body (Raw JSON - Example)**:
 
 ```json
 
 {
 
-"name": "Jane Doe",
+"name": "Alice Johnson",
 
-"email": "<janedoe@example.com>",
+"email": "<alice@example.com>",
 
 "age": 28,
 
@@ -161,37 +76,149 @@ The backend API will now be available at <http://localhost:5000>.
 
 }
 ```
-
-**3\. Update an Employee**
-
-- **URL**: /api/employees/:id
-- **Method**: PUT
-- **Description**: Updates an existing employee's details.
-- **Request Body**:
+- **Expected Response (Example)**:
 
 ```json
 
 {
 
-"name": "Nandhu,
+"message": "Employee added successfully",
 
-"email": "<Nandhu@gmail.com>",
+"employee": {
 
-"age": 35,
+"id": 3,
 
-"salary": 60000
+"name": "Alice Johnson",
+
+"email": "<alice@example.com>",
+
+"age": 28,
+
+"salary": 55000
+
+}
 
 }
 ```
-**4\. Delete an Employee**
+**3\. Update an Employee (Test Update API)**
 
-- **URL**: /api/employees/:id
+- **Method**: PUT
+- **URL**:
+
+```bash
+
+<http://localhost:5000/api/employees/67a9e24fe24ab66c0bd6f997>
+```
+_(Replace 3 with the actual id of the employee you want to update)_
+
+- **Headers**:
+
+pgsql
+
+Content-Type: application/json
+
+- **Body (Raw JSON - Example)**:
+
+``json
+
+{
+
+           "name": "Nandhini",
+
+           "email": "<Nandhini@gmail.com>",
+
+           "age": 26,
+
+           "salary": 150000
+
+}
+```
+- **Expected Response (Example)**:
+
+```json
+
+{
+
+   "message": "Employee updated successfully",
+
+   "employee": {
+
+       "\_id": "67a9e24fe24ab66c0bd6f997",
+
+      "name": "Nandhini",
+
+       "email": "<Nandhini@gmail.com>",
+
+       "age": 26,
+
+       "salary": 150000,
+
+       "createdAt": "2025-02-10T11:26:07.663Z",
+
+       "updatedAt": "2025-02-11T07:28:01.936Z",
+
+       "\__v": 0
+
+   }
+
+}
+```
+**4\. Delete an Employee (Test Delete API)**
+
 - **Method**: DELETE
-- **Description**: Deletes an employee by ID.
+- **URL**:
 
-**Technologies Used**
+```bash
 
-- **Frontend**: React, Axios, PropTypes
-- **Backend**: Node.js, Express
-- **Database**: MongoDB
-- **Development Tools**: Postman (for testing APIs), VSCode
+<http://localhost:5000/api/employees/3>
+```
+_(Replace 3 with the actual id of the employee you want to delete)_
+
+- **Expected Response (Example)**:
+
+```json
+
+{
+
+"message": "Employee deleted successfully"
+
+}
+```
+**How to Test in Postman**
+
+1. Open **Postman**.
+2. Select the correct **HTTP method** (GET, POST, PUT, DELETE).
+3. Enter the API **URL** in the request bar.
+4. If needed, go to the **Body** tab → Select **Raw** → Choose **JSON** → Enter the test JSON data.
+5. Click **Send** and check the response.
+
+**If Any API Fails:**
+
+1. Check if your backend is running.
+2. Verify if the endpoint paths are correctly set in your backend.
+3. If getting an error, share the Postman response or console logs.
+4. **nodemon not recognized**:
+    - If nodemon is not installed, you can install it globally using the following command:
+
+```bash
+
+npm install -g nodemon
+```
+- - Or, you can install it locally:
+
+```bash
+
+npm install --save-dev nodemon
+```
+Then, run it using npx.
+
+1. **Other Errors:** 
+
+**What you should try:**
+
+1. Run the command:
+
+```bash
+
+npx nodemon server.js
+```
