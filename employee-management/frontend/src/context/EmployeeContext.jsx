@@ -26,8 +26,8 @@ const EmployeeProvider = ({ children }) => {
 
   const addEmployee = async (newEmployee) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/employees/add', newEmployee); // Updated route
-      setEmployees([...employees, response.data.employee]); // Assuming the response contains the added employee in 'employee'
+      const response = await axios.post('http://localhost:5000/api/employees/add', newEmployee); // Add Employee
+      setEmployees([...employees, response.data.employee]); // Assuming response has added employee data
     } catch (error) {
       console.error('Error adding employee', error);
     }
@@ -35,9 +35,9 @@ const EmployeeProvider = ({ children }) => {
 
   const updateEmployee = async (id, updatedEmployee) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/employees/${id}`, updatedEmployee); // Updated route
+      const response = await axios.put(`http://localhost:5000/api/employees/${id}`, updatedEmployee); // Update Employee
       setEmployees(
-        employees.map((emp) => (emp._id === id ? response.data.employee : emp)) // Assuming response contains updated employee
+        employees.map((emp) => (emp._id === id ? response.data.employee : emp)) // Assuming response has updated employee data
       );
     } catch (error) {
       console.error('Error updating employee', error);
